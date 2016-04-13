@@ -1,10 +1,10 @@
 package com.segment.jsonrpc;
 
 class JsonRPCResponse<T> {
-    String jsonrpc = "1.0";
+    String jsonrpc;
     long id;
     T result;
-    Object error;
+    JsonRPCError error;
 
     @Override
     public boolean equals(Object o) {

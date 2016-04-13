@@ -21,11 +21,11 @@ public class JsonRPCConverters {
         }
     }
 
-    static class JsonRPC2RequestBodyConverter<T> implements Converter<T, RequestBody> {
+    static class JsonRPCRequestBodyConverter<T> implements Converter<T, RequestBody> {
         final String method;
         final Converter<JsonRPCRequest, RequestBody> delegate;
 
-        JsonRPC2RequestBodyConverter(String method, Converter<JsonRPCRequest, RequestBody> delegate) {
+        JsonRPCRequestBodyConverter(String method, Converter<JsonRPCRequest, RequestBody> delegate) {
             this.method = method;
             this.delegate = delegate;
         }
@@ -36,11 +36,11 @@ public class JsonRPCConverters {
         }
     }
 
-    static class JsonRPC2NotificationBodyConverter<T> implements Converter<T, RequestBody> {
+    static class JsonRPCNotificationBodyConverter<T> implements Converter<T, RequestBody> {
         final String method;
         final Converter<JsonRPCNotification, RequestBody> delegate;
 
-        JsonRPC2NotificationBodyConverter(String method, Converter<JsonRPCNotification, RequestBody> delegate) {
+        JsonRPCNotificationBodyConverter(String method, Converter<JsonRPCNotification, RequestBody> delegate) {
             this.method = method;
             this.delegate = delegate;
         }
