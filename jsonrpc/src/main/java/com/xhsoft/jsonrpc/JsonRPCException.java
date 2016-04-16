@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 /**
  * A standardized exception class that conforms with JSON-RPC specifications.

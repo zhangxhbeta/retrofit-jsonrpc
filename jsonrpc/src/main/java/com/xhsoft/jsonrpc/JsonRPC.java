@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

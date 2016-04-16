@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 /**
  * Created by zhangxh on 16/4/13.

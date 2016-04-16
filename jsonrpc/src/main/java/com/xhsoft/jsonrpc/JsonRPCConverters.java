@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;

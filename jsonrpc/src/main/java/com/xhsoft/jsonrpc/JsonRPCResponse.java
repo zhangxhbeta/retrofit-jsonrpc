@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 public class JsonRPCResponse<T> {
     String jsonrpc;

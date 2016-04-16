@@ -1,4 +1,4 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
 /*
  * Copyright (C) 2008 Google Inc.

@@ -1,8 +1,8 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
-import com.segment.jsonrpc.adapter.JsonRPCCall;
-import com.segment.jsonrpc.adapter.JsonRPCCallAdapterFactory;
-import com.segment.jsonrpc.adapter.JsonRPCCallback;
+import com.xhsoft.jsonrpc.adapter.JsonRPCCall;
+import com.xhsoft.jsonrpc.adapter.JsonRPCCallAdapterFactory;
+import com.xhsoft.jsonrpc.adapter.JsonRPCCallback;
 import net.jodah.concurrentunit.Waiter;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

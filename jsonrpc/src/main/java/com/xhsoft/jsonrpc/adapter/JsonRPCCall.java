@@ -1,6 +1,6 @@
-package com.segment.jsonrpc.adapter;
+package com.xhsoft.jsonrpc.adapter;
 
-import com.segment.jsonrpc.JsonRPCException;
+import com.xhsoft.jsonrpc.JsonRPCException;
 import okhttp3.Request;
 
 /**

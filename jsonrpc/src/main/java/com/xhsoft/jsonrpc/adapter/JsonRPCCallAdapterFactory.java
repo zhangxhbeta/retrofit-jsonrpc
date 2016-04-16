@@ -1,6 +1,6 @@
-package com.segment.jsonrpc.adapter;
+package com.xhsoft.jsonrpc.adapter;
 
-import com.segment.jsonrpc.JsonRPCResponse;
+import com.xhsoft.jsonrpc.JsonRPCResponse;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
@@ -40,7 +40,7 @@ public class JsonRPCCallAdapterFactory extends CallAdapter.Factory {
 
             @Override
             public <R> JsonRPCCall<R> adapt(Call<R> call) {
-                return new JsonRPCCallAdapter<>(call, callbackExecutor, clientRequireAllResponse);
+                return new JsonRPCCallAdapter<R>(call, callbackExecutor, clientRequireAllResponse);
             }
         };
     }

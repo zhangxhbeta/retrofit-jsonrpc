@@ -1,7 +1,7 @@
-package com.segment.jsonrpc;
+package com.xhsoft.jsonrpc;
 
-import com.segment.jsonrpc.adapter.JsonRPCCall;
-import com.segment.jsonrpc.adapter.JsonRPCCallAdapterFactory;
+import com.xhsoft.jsonrpc.adapter.JsonRPCCall;
+import com.xhsoft.jsonrpc.adapter.JsonRPCCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.mockwebserver.MockResponse;
@@ -9,8 +9,6 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.http.Body;
@@ -135,7 +133,7 @@ public class JsonRPCCallTest {
             assertThat(res.getError().getCode()).isEqualTo(-10086);
             fail("失败未抛出异常");
         } catch (JsonRPCException e) {
-            assertThat(e.getCode()).isEqualTo(JsonRPCError.ERROR_CODE_NETWORK_ERROR);
+            assertThat(e.getCode()).isEqualTo(-10086);
         }
 
     }

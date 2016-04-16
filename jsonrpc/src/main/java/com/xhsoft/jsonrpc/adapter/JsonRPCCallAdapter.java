@@ -1,9 +1,8 @@
-package com.segment.jsonrpc.adapter;
+package com.xhsoft.jsonrpc.adapter;
 
-import com.segment.jsonrpc.JsonRPC;
-import com.segment.jsonrpc.JsonRPCError;
-import com.segment.jsonrpc.JsonRPCException;
-import com.segment.jsonrpc.JsonRPCResponse;
+import com.xhsoft.jsonrpc.JsonRPCError;
+import com.xhsoft.jsonrpc.JsonRPCException;
+import com.xhsoft.jsonrpc.JsonRPCResponse;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -102,14 +101,20 @@ public class JsonRPCCallAdapter<T> implements JsonRPCCall<T> {
 
     @Override
     public JsonRPCCall<T> clone() {
-        return new JsonRPCCallAdapter<>(call.clone(), callbackExecutor, clientRequireAllResponse);
+        return new JsonRPCCallAdapter<T>(call.clone(), callbackExecutor, clientRequireAllResponse);
     }
 
     @Override
     public T execute() throws JsonRPCException {
         try {
             if (clientRequireAllResponse) {
-                return call.execute().body();
+                T _body = call.execute().body();
+                JsonRPCResponse res = (JsonRPCResponse) _body;
+                if (res.getError() != null) {
+                    throw new JsonRPCException(res.getError());
+                }
+
+                return _body;
             } else {
                 JsonRPCResponse<T> res = (JsonRPCResponse<T>) call.execute().body();
                 if (res.getError() != null) {

@@ -1,9 +1,7 @@
-package com.segment.jsonrpc.adapter;
+package com.xhsoft.jsonrpc.adapter;
 
-import com.segment.jsonrpc.JsonRPCError;
-import com.segment.jsonrpc.JsonRPCException;
-import com.segment.jsonrpc.JsonRPCResponse;
-import retrofit2.Response;
+import com.xhsoft.jsonrpc.JsonRPCError;
+import com.xhsoft.jsonrpc.JsonRPCException;
 
 /**
  * JsonRPC 回调
