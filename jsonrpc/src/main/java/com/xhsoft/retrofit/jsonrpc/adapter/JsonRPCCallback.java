@@ -1,7 +1,7 @@
-package com.xhsoft.jsonrpc.adapter;
+package com.xhsoft.retrofit.jsonrpc.adapter;
 
-import com.xhsoft.jsonrpc.JsonRPCError;
-import com.xhsoft.jsonrpc.JsonRPCException;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCError;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCException;
 
 /**
  * JsonRPC 回调

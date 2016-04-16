@@ -1,6 +1,6 @@
-package com.xhsoft.jsonrpc.adapter;
+package com.xhsoft.retrofit.jsonrpc.adapter;
 
-import com.xhsoft.jsonrpc.JsonRPCResponse;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCResponse;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;

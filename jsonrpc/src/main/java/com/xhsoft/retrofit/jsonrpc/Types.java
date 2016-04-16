@@ -1,4 +1,4 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
 /*
  * Copyright (C) 2008 Google Inc.

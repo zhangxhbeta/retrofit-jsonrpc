@@ -1,4 +1,4 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

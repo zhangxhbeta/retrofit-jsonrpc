@@ -1,7 +1,7 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
-import com.xhsoft.jsonrpc.adapter.JsonRPCCall;
-import com.xhsoft.jsonrpc.adapter.JsonRPCCallAdapterFactory;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCall;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.mockwebserver.MockResponse;

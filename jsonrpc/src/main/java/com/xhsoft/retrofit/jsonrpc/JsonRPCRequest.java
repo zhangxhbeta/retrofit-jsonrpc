@@ -1,4 +1,4 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
 import java.util.Random;
 

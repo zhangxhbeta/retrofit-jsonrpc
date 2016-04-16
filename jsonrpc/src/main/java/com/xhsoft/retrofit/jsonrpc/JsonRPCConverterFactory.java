@@ -1,6 +1,6 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
-import com.xhsoft.jsonrpc.adapter.JsonRPCCall;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCall;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.CallAdapter;

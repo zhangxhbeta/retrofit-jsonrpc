@@ -1,8 +1,8 @@
-package com.xhsoft.jsonrpc.adapter;
+package com.xhsoft.retrofit.jsonrpc.adapter;
 
-import com.xhsoft.jsonrpc.JsonRPCError;
-import com.xhsoft.jsonrpc.JsonRPCException;
-import com.xhsoft.jsonrpc.JsonRPCResponse;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCError;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCException;
+import com.xhsoft.retrofit.jsonrpc.JsonRPCResponse;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;

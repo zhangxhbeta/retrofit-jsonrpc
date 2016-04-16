@@ -1,4 +1,4 @@
-package com.xhsoft.jsonrpc;
+package com.xhsoft.retrofit.jsonrpc;
 
 /**
  * A standardized exception class that conforms with JSON-RPC specifications.
