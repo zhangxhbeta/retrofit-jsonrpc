@@ -1,10 +1,26 @@
 package com.segment.jsonrpc;
 
-class JsonRPCResponse<T> {
+public class JsonRPCResponse<T> {
     String jsonrpc;
     long id;
     T result;
     JsonRPCError error;
+
+    public String getJsonrpc() {
+        return jsonrpc;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public JsonRPCError getError() {
+        return error;
+    }
 
     @Override
     public boolean equals(Object o) {

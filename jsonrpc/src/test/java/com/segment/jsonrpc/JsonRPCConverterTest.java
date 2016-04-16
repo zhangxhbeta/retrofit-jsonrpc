@@ -42,6 +42,10 @@ public class JsonRPCConverterTest {
         @POST("/rpc")
         @JsonRPC("Arith.multiply")
         Call<Integer> multiply(@Body Object... a);
+
+        @POST("/rpc")
+        @JsonRPC("Arith.multiply")
+        Call<JsonRPCResponse<Integer>> getResponseMultiply(@Body Object... a);
     }
 
     @Test
@@ -72,5 +76,34 @@ public class JsonRPCConverterTest {
 
 
         assertThat(response.body()).isEqualTo(6);
+    }
+
+    @Test
+    public void getResponseMultiply() throws Exception {
+        server.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json; charset=utf-8")
+                .setBody("{"
+                                + "\"jsonrpc\":\"2.0\","
+                                + "\"id\":4,"
+                                + "\"result\":6"
+                                + "}"
+                ));
+
+        MultiplicationService service = retrofit.create(MultiplicationService.class);
+
+        Response<JsonRPCResponse<Integer>> response = service.getResponseMultiply(2, 3).execute();
+
+        RecordedRequest request = server.takeRequest();
+        assertThat(request.getHeader("Content-Type"))
+                .isEqualToIgnoringCase("application/json; charset=utf-8");
+        assertThat(request.getBody().readByteString().utf8().replaceAll("\"id\":[0-9]+,", "")) //
+                .isEqualTo("{"
+                                + "\"jsonrpc\":\"2.0\","
+                                + "\"method\":\"Arith.multiply\","
+                                + "\"params\":[2,3]"
+                                + "}"
+                );
+
+        assertThat(response.body().getResult()).isEqualTo(6);
     }
 }

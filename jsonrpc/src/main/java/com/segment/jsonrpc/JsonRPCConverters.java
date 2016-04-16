@@ -7,17 +7,25 @@ import retrofit2.Converter;
 import java.io.IOException;
 
 public class JsonRPCConverters {
+
     static class JsonRPCResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         final Converter<ResponseBody, JsonRPCResponse<T>> delegate;
+        final boolean forceReturResponse;
 
-        JsonRPCResponseBodyConverter(Converter<ResponseBody, JsonRPCResponse<T>> delegate) {
+        JsonRPCResponseBodyConverter(Converter<ResponseBody, JsonRPCResponse<T>> delegate, boolean forceReturResponse) {
             this.delegate = delegate;
+            this.forceReturResponse = forceReturResponse;
         }
 
         @Override
         public T convert(ResponseBody responseBody) throws IOException {
             JsonRPCResponse<T> response = delegate.convert(responseBody);
-            return response.result;
+
+            if (forceReturResponse) {
+                return (T) response;
+            } else {
+                return response.result;
+            }
         }
     }
 
