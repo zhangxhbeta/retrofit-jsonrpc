@@ -9,7 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
- * 加密／解密的转换库
+ * 加密／解密的转换工厂
  *
  * Created by zhangxh on 16/4/16.
  */

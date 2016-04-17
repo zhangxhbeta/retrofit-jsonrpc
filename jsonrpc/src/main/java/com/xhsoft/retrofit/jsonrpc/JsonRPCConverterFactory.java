@@ -10,6 +10,9 @@ import retrofit2.Retrofit;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
+/**
+ * 支持 Retrofit 的 JsonRPC 转换器
+ */
 public class JsonRPCConverterFactory extends Converter.Factory {
     public static JsonRPCConverterFactory create() {
         return new JsonRPCConverterFactory();

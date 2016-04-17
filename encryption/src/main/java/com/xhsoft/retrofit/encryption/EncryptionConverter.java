@@ -11,6 +11,7 @@ import java.security.GeneralSecurityException;
 
 /**
  * 加解密转换器
+ *
  * Created by zhangxh on 16/4/16.
  */
 public class EncryptionConverter {

@@ -1,5 +1,9 @@
 package com.xhsoft.retrofit.jsonrpc;
 
+/**
+ * JsonRPC 响应
+ * @param <T>
+ */
 public class JsonRPCResponse<T> {
     String jsonrpc;
     long id;

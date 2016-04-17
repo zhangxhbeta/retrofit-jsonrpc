@@ -1,6 +1,8 @@
 package com.xhsoft.retrofit.jsonrpc;
 
 /**
+ * JsonRPC 错误
+ *
  * Created by zhangxh on 16/4/13.
  */
 public class JsonRPCError {

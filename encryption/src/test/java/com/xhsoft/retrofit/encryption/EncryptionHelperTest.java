@@ -14,7 +14,7 @@ public class EncryptionHelperTest {
 
     @Test
     public void testEncryption() throws Exception {
-        String key = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
+        String key = "9E7E598F42CB0FE3314830FABC8968671877DB781615C104";
 
         String message = "hello world 你好世界!";
         String a = EncryptionHelper.encryptText(message, key, new byte[]{});
@@ -25,7 +25,7 @@ public class EncryptionHelperTest {
 
     @Test
     public void testEncryptionBytes() throws Exception {
-        String key = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
+        String key = "9E7E598F42CB0FE3314830FABC8968671877DB781615C104";
 
         String message = "hello world 你好世界!";
         byte[] a = EncryptionHelper.encryptBytes(message.getBytes("gbk"), key, new byte[]{});

@@ -1,15 +1,8 @@
 package com.xhsoft.retrofit.jsonrpc;
 
 /**
- * A standardized exception class that conforms with JSON-RPC specifications.
- * 
- * @author Wes Widner
- * @see <a
- *      href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal#error-object">JSON-RPC
- *      Error Specification</a>
- */
-
-@SuppressWarnings("serial")
+ * 按照 JSON-RPC 规范的 Error 定义的异常
+ **/
 public class JsonRPCException extends RuntimeException {
 	private int code;
 

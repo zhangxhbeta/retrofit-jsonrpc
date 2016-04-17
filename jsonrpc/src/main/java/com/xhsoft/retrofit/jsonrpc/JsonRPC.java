@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Make a JSON-RPC 2.0 request.
+ * JSON-RPC 2.0 请求
  */
 @Target(METHOD)
 @Retention(RUNTIME)

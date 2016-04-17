@@ -20,12 +20,11 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
- * 测试通过 JsonRPC 适配器来搞定无法直接返回body的问题
+ * 演示如何写一个 JsonRpc 异步请求
  */
 public class MultiplicationAsyncTest {
 
-    private static final String ekey = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
-    private static final String dkey = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
+    private static final String key = "9E7E598F42CB0FE3314830FABC8968671877DB781615C104";
 
     @Rule
     public final MockWebServer server = new MockWebServer();
@@ -42,7 +41,7 @@ public class MultiplicationAsyncTest {
         retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(server.url("/")) // Local Server: "http://localhost:1234"
-                .addConverterFactory(EncryptionConverterFactory.create(ekey, dkey))
+                .addConverterFactory(EncryptionConverterFactory.create(key, key))
                 .addConverterFactory(JsonRPCConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(new JsonRPCCallAdapterFactory())
@@ -63,7 +62,7 @@ public class MultiplicationAsyncTest {
                                 + "\"jsonrpc\":\"2.0\","
                                 + "\"id\":4,"
                                 + "\"result\":6"
-                                + "}", dkey, new byte[]{})
+                                + "}", key, new byte[]{})
                 ));
 
 
@@ -104,7 +103,7 @@ public class MultiplicationAsyncTest {
                                 + "\"code\":-10086,"
                                 + "\"message\":\"测试错误\","
                                 + "\"data\":\"data\"}"
-                                + "}", dkey, new byte[]{})
+                                + "}", key, new byte[]{})
                 ));
 
         FoobarService service = retrofit.create(FoobarService.class);
@@ -146,7 +145,7 @@ public class MultiplicationAsyncTest {
                                 + "\"code\":-32603,"
                                 + "\"message\":\"测试错误\","
                                 + "\"data\":\"data\"}"
-                                + "}", dkey, new byte[]{})
+                                + "}", key, new byte[]{})
                 ));
 
         FoobarService service = retrofit.create(FoobarService.class);

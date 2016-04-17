@@ -28,10 +28,12 @@ import java.nio.charset.Charset;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
+/**
+ * 演示如何写一个 JsonRpc 同步请求
+ */
 public class MultiplicationSyncTest {
 
-    private static final String ekey = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
-    private static final String dkey = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
+    private static final String key = "78165B0FE3319E7E5918968671877DB8F42C48BCC10430FA";
 
     @Rule
     public final MockWebServer server = new MockWebServer();
@@ -48,7 +50,7 @@ public class MultiplicationSyncTest {
         retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(server.url("/")) // Local Server: "http://localhost:1234"
-                .addConverterFactory(EncryptionConverterFactory.create(ekey, dkey))
+                .addConverterFactory(EncryptionConverterFactory.create(key, key))
                 .addConverterFactory(JsonRPCConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(new JsonRPCCallAdapterFactory())
@@ -69,7 +71,7 @@ public class MultiplicationSyncTest {
                         + "\"jsonrpc\":\"2.0\","
                         + "\"id\":43434343,"
                         + "\"result\":6"
-                        + "}", dkey, new byte[]{})));
+                        + "}", key, new byte[]{})));
 
         MultiplicationService service = retrofit.create(MultiplicationService.class);
         try {
@@ -93,7 +95,7 @@ public class MultiplicationSyncTest {
                         + "\"code\":-32603,"
                         + "\"message\":\"测试错误\","
                         + "\"data\":\"data\"}"
-                        + "}", dkey, new byte[]{})));
+                        + "}", key, new byte[]{})));
 
         MultiplicationService service = retrofit.create(MultiplicationService.class);
         try {

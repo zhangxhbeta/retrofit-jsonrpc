@@ -2,7 +2,10 @@ package com.xhsoft.retrofit.jsonrpc;
 
 import java.util.Random;
 
-class JsonRPCRequest {
+/**
+ * JsonRPC 请求
+ */
+public class JsonRPCRequest {
     static final Random RANDOM = new Random();
 
     final String jsonrpc;
