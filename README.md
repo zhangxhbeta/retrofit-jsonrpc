@@ -67,14 +67,16 @@ service.multiply(2, 3).enqueue(new JsonRPCCallback<Integer>() {
 int result = service.multiply(2, 3).execute(); // -> 6
 ```
 
-## 更多用法
+## Todo 清单
 
-TODO: 待补充
-
-## 尚未实现
-
+- [x] 完整的 `JSON-RPC 2.0` 规范实现
+- [x] `JsonRPCCall` 适配器，替代默认的 `Call`
+- [x] `http body` 传输中加密/解密（基于3DES/base64)
+- [ ] 强类型的接口方法参数声明，替代 `Object...`
+- [ ] 支持直接使用 `Java` 方法名
 - [ ] 单向加密解密开关
 - [ ] 安卓环境测试
+- [ ] 补充更多例子，如：错误统一拦截处理，附加自定义 http 头，Cookie 处理等
 
 ## 下载
 
