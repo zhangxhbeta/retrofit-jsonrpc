@@ -23,10 +23,6 @@ public class EncryptionConverterFactory extends Converter.Factory {
         return new EncryptionConverterFactory(encryptionKey, dencryptionKey);
     }
 
-    public static EncryptionConverterFactory create(String encryptionKey) {
-        return new EncryptionConverterFactory(encryptionKey, encryptionKey);
-    }
-
     private EncryptionConverterFactory(String encryptionKey, String dencryptionKey) {
         // Private constructor.
         this.encryptionKey = encryptionKey;
@@ -38,7 +34,12 @@ public class EncryptionConverterFactory extends Converter.Factory {
         Converter<ResponseBody, ?> delegate =
                 retrofit.nextResponseBodyConverter(this, type, annotations);
 
-        return new EncryptionConverter.EncryptionResponseBodyConverter(delegate, dencryptionKey);
+        if (dencryptionKey == null) {
+            return delegate;
+        } else {
+            return new EncryptionConverter.EncryptionResponseBodyConverter(delegate, dencryptionKey);
+        }
+
     }
 
     @Override
@@ -47,6 +48,10 @@ public class EncryptionConverterFactory extends Converter.Factory {
                 retrofit.nextRequestBodyConverter(this, type, parameterAnnotations,
                         methodAnnotations);
 
-        return new EncryptionConverter.EncryptionRequestBodyConverter(delegate, encryptionKey);
+        if (encryptionKey == null) {
+            return delegate;
+        } else {
+            return new EncryptionConverter.EncryptionRequestBodyConverter(delegate, encryptionKey);
+        }
     }
 }
