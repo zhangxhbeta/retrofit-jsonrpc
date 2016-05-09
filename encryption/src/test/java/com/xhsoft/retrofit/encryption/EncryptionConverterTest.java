@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EncryptionConverterTest {
 
     private static final String ekey = "9E7E598F42CB0FE3314830FABC8968671877DB781615C104";
-    private static final String dkey = "9E7E598F42CB0FE3314830FABC8968671877DB781615C104";
+    private static final String dkey = "CB0FE3598F42830FC104ABC49E7E1877DB78168968673115";
 
     @Rule
     public final MockWebServer server = new MockWebServer();
