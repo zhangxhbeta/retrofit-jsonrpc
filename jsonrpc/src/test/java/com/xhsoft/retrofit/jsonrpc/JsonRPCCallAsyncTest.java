@@ -1,8 +1,9 @@
 package com.xhsoft.retrofit.jsonrpc;
 
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCall;
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCallAdapterFactory;
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCallback;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCall;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCallAdapterFactory;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCallback;
+
 import net.jodah.concurrentunit.Waiter;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,9 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 /**
- * 测试通过 JsonRPC 适配器来搞定无法直接返回body的问题
+ * 测试通过 JsonRpc 适配器来搞定无法直接返回body的问题
  */
-public class JsonRPCCallAsyncTest {
+public class JsonRpcCallAsyncTest {
     @Rule
     public final MockWebServer server = new MockWebServer();
 
@@ -38,20 +39,20 @@ public class JsonRPCCallAsyncTest {
         retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(server.url("/")) // Local Server: "http://localhost:1234"
-                .addConverterFactory(JsonRPCConverterFactory.create())
+                .addConverterFactory(JsonRpcConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
-                .addCallAdapterFactory(new JsonRPCCallAdapterFactory())
+                .addCallAdapterFactory(new JsonRpcCallAdapterFactory())
                 .build();
     }
 
     interface FoobarService {
         @POST("/")
-        @JsonRPC
-        JsonRPCCall<Integer> jsonRpcCall(@Body Object... a);
+        @JsonRpc
+        JsonRpcCall<Integer> jsonRpcCall(@Body Object... a);
 
         @POST("/")
-        @JsonRPC
-        JsonRPCCall<JsonRPCResponse<Integer>> jsonRpcCallResponse(@Body Object... a);
+        @JsonRpc
+        JsonRpcCall<JsonRpcResponse<Integer>> jsonRpcCallResponse(@Body Object... a);
     }
 
     @Test
@@ -69,21 +70,21 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCall(2, 3).enqueue(new JsonRPCCallback<Integer>() {
+        service.jsonRpcCall(2, 3).enqueue(new JsonRpcCallback<Integer>() {
             @Override
-            public void success(JsonRPCCall<Integer> call, Integer response) {
+            public void success(JsonRpcCall<Integer> call, Integer response) {
                 waiter.assertEquals(response, 6);
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<Integer> call, JsonRPCError response) {
+            public void error(JsonRpcCall<Integer> call, JsonRpcError response) {
                 waiter.fail("错误调用 error");
                 waiter.resume();
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<Integer> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
                 waiter.fail("错误调用 unexpectedError");
                 waiter.resume();
             }
@@ -106,21 +107,21 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRPCCallback<JsonRPCResponse<Integer>>() {
+        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRpcCallback<JsonRpcResponse<Integer>>() {
             @Override
-            public void success(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCResponse<Integer> response) {
+            public void success(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcResponse<Integer> response) {
                 waiter.assertEquals(response.getResult(), 6);
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCError response) {
+            public void error(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcError response) {
                 waiter.fail("错误调用 error");
                 waiter.resume();
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcException t) {
                 waiter.fail("错误调用 unexpectedError");
                 waiter.resume();
             }
@@ -146,21 +147,21 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCall(2, 3).enqueue(new JsonRPCCallback<Integer>() {
+        service.jsonRpcCall(2, 3).enqueue(new JsonRpcCallback<Integer>() {
             @Override
-            public void success(JsonRPCCall<Integer> call, Integer response) {
+            public void success(JsonRpcCall<Integer> call, Integer response) {
                 waiter.fail("错误调用 success");
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<Integer> call, JsonRPCError response) {
+            public void error(JsonRpcCall<Integer> call, JsonRpcError response) {
                 waiter.fail("错误调用 error");
                 waiter.resume();
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<Integer> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
                 waiter.assertNotNull(t);
                 waiter.assertEquals(t.getCode(), -10086);
                 waiter.assertEquals(t.getMessage(), "测试错误");
@@ -188,15 +189,15 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCall(2, 3).enqueue(new JsonRPCCallback<Integer>() {
+        service.jsonRpcCall(2, 3).enqueue(new JsonRpcCallback<Integer>() {
             @Override
-            public void success(JsonRPCCall<Integer> call, Integer response) {
+            public void success(JsonRpcCall<Integer> call, Integer response) {
                 waiter.fail("错误调用 success");
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<Integer> call, JsonRPCError t) {
+            public void error(JsonRpcCall<Integer> call, JsonRpcError t) {
                 waiter.assertNotNull(t);
                 waiter.assertEquals(t.getCode(), -32603);
                 waiter.assertEquals(t.getMessage(), "测试错误");
@@ -204,7 +205,7 @@ public class JsonRPCCallAsyncTest {
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<Integer> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
                 waiter.fail("错误调用 unexpectedError");
                 waiter.resume();
             }
@@ -230,15 +231,15 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRPCCallback<JsonRPCResponse<Integer>>() {
+        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRpcCallback<JsonRpcResponse<Integer>>() {
             @Override
-            public void success(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCResponse<Integer> response) {
+            public void success(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcResponse<Integer> response) {
                 waiter.fail("错误调用 success");
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCError response) {
+            public void error(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcError response) {
                 waiter.assertNotNull(response);
                 waiter.assertEquals(response.getCode(), -32603);
                 waiter.assertEquals(response.getMessage(), "测试错误");
@@ -246,7 +247,7 @@ public class JsonRPCCallAsyncTest {
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcException t) {
                 waiter.fail("错误调用 unexpectedError");
                 waiter.resume();
             }
@@ -272,21 +273,21 @@ public class JsonRPCCallAsyncTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         final Waiter waiter = new Waiter();
-        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRPCCallback<JsonRPCResponse<Integer>>() {
+        service.jsonRpcCallResponse(2, 3).enqueue(new JsonRpcCallback<JsonRpcResponse<Integer>>() {
             @Override
-            public void success(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCResponse<Integer> response) {
+            public void success(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcResponse<Integer> response) {
                 waiter.fail("错误调用 success");
                 waiter.resume();
             }
 
             @Override
-            public void error(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCError response) {
+            public void error(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcError response) {
                 waiter.fail("错误调用 error");
                 waiter.resume();
             }
 
             @Override
-            public void unexpectedError(JsonRPCCall<JsonRPCResponse<Integer>> call, JsonRPCException t) {
+            public void unexpectedError(JsonRpcCall<JsonRpcResponse<Integer>> call, JsonRpcException t) {
                 waiter.assertNotNull(t);
                 waiter.assertEquals(t.getCode(), -32700);
                 waiter.assertEquals(t.getMessage(), "解析错误");

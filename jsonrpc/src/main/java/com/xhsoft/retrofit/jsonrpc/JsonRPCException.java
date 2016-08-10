@@ -3,52 +3,52 @@ package com.xhsoft.retrofit.jsonrpc;
 /**
  * 按照 JSON-RPC 规范的 Error 定义的异常
  **/
-public class JsonRPCException extends RuntimeException {
-	private int code;
+public class JsonRpcException extends RuntimeException {
+  private int code;
 
-	public JsonRPCException() {
-		super();
-		setCode(-32603); // Generic JSON-RPC error code.
-	}
+  public JsonRpcException() {
+    super();
+    setCode(-32603); // Generic JSON-RPC error code.
+  }
 
-	public JsonRPCException(String message) {
-		super(message);
-		setCode(-32603); // Generic JSON-RPC error code.
-	}
+  public JsonRpcException(String message) {
+    super(message);
+    setCode(-32603); // Generic JSON-RPC error code.
+  }
 
-	public JsonRPCException(String message, int code) {
-		super(message);
-		setCode(code);
-	}
+  public JsonRpcException(String message, int code) {
+    super(message);
+    setCode(code);
+  }
 
-	public JsonRPCException(JsonRPCError error) {
-		super(error.message);
-		setCode(error.code);
-	}
+  public JsonRpcException(JsonRpcError error) {
+    super(error.message);
+    setCode(error.code);
+  }
 
-	public JsonRPCException(Throwable e, int code) {
-		super(e.getLocalizedMessage());
-		setCode(code);
-	}
+  public JsonRpcException(Throwable e, int code) {
+    super(e.getLocalizedMessage());
+    setCode(code);
+  }
 
-	/**
-	 * Set the JSON-RPC error code for this exception
-	 * 
-	 * @param code
-	 *            The JSON-RPC error code, usually negative in the range of
-	 *            -32768 to -32000 inclusive
-	 */
-	public void setCode(int code) {
-		this.code = code;
-	}
+  /**
+   * Set the JSON-RPC error code for this exception
+   *
+   * @param code
+   *            The JSON-RPC error code, usually negative in the range of
+   *            -32768 to -32000 inclusive
+   */
+  public void setCode(int code) {
+    this.code = code;
+  }
 
-	/**
-	 * Get the JSON-RPC error code of this exception.
-	 * 
-	 * @return long Error code, usually negative in the range of -32768 to
-	 *         -32000 inclusive
-	 */
-	public int getCode() {
-		return code;
-	}
+  /**
+   * Get the JSON-RPC error code of this exception.
+   *
+   * @return long Error code, usually negative in the range of -32768 to
+   *         -32000 inclusive
+   */
+  public int getCode() {
+    return code;
+  }
 }

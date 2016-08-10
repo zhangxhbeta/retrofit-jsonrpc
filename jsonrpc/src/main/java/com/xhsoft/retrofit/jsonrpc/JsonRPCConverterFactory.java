@@ -1,6 +1,6 @@
 package com.xhsoft.retrofit.jsonrpc;
 
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCall;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCall;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.CallAdapter;
@@ -11,14 +11,14 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
- * 支持 Retrofit 的 JsonRPC 转换器
+ * 支持 Retrofit 的 JsonRpc 转换器
  */
-public class JsonRPCConverterFactory extends Converter.Factory {
-    public static JsonRPCConverterFactory create() {
-        return new JsonRPCConverterFactory();
+public class JsonRpcConverterFactory extends Converter.Factory {
+    public static JsonRpcConverterFactory create() {
+        return new JsonRpcConverterFactory();
     }
 
-    private JsonRPCConverterFactory() {
+    private JsonRpcConverterFactory() {
         // Private constructor.
     }
 
@@ -26,16 +26,16 @@ public class JsonRPCConverterFactory extends Converter.Factory {
     public Converter<ResponseBody, ?> responseBodyConverter(Type type,
                                                             Annotation[] annotations,
                                                             Retrofit retrofit) {
-        if (!Utils.isAnnotationPresent(annotations, JsonRPC.class)
-                && !Utils.isAnnotationPresent(annotations, JsonRPC.class)) {
+        if (!Utils.isAnnotationPresent(annotations, JsonRpc.class)
+                && !Utils.isAnnotationPresent(annotations, JsonRpc.class)) {
             return null;
         }
 
         final Class<?> t = Utils.getRawType(type);
 
-        // 调用方期待返回整个协议体，无论是 Call 还是 JsonRPCCall 都可以很好支持
-        if (t == JsonRPCResponse.class) {
-            Converter<ResponseBody, JsonRPCResponse> delegate =
+        // 调用方期待返回整个协议体，无论是 Call 还是 JsonRpcCall 都可以很好支持
+        if (t == JsonRpcResponse.class) {
+            Converter<ResponseBody, JsonRpcResponse> delegate =
                     retrofit.nextResponseBodyConverter(this, type, annotations);
 
             return delegate;
@@ -45,42 +45,42 @@ public class JsonRPCConverterFactory extends Converter.Factory {
         // 1、配置了Adapter，这时候可以返回其他信息给 JsonRPCAdapter
         // 2、没有配置，那么就只能返回正确响应了，错误被丢失
 
-        Type rpcType = Types.newParameterizedType(JsonRPCResponse.class, type);
-        Type returnType = Types.newParameterizedType(JsonRPCCall.class, rpcType);
-        Converter<ResponseBody, JsonRPCResponse> delegate =
+        Type rpcType = Types.newParameterizedType(JsonRpcResponse.class, type);
+        Type returnType = Types.newParameterizedType(JsonRpcCall.class, rpcType);
+        Converter<ResponseBody, JsonRpcResponse> delegate =
                 retrofit.nextResponseBodyConverter(this, rpcType, annotations);
         try {
             CallAdapter<?> adapter = retrofit.callAdapter(returnType, annotations);
             // 有适配器
-            return new JsonRPCConverters.JsonRPCResponseBodyConverter(delegate, true);
+            return new JsonRpcConverters.JsonRPCResponseBodyConverter(delegate, true);
         } catch (IllegalArgumentException e) {
             // 这种情况下说明没有配置适配器
-            return new JsonRPCConverters.JsonRPCResponseBodyConverter(delegate, false);
+            return new JsonRpcConverters.JsonRPCResponseBodyConverter(delegate, false);
         }
     }
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] annotations,
                                                           Annotation[] methodAnnotations, Retrofit retrofit) {
-        JsonRPC jsonRPCAnnotation = Utils.findAnnotation(methodAnnotations, JsonRPC.class);
-        if (jsonRPCAnnotation != null) {
-            String method = jsonRPCAnnotation.value();
-            boolean notification = jsonRPCAnnotation.notification();
+        JsonRpc jsonRpcAnnotation = Utils.findAnnotation(methodAnnotations, JsonRpc.class);
+        if (jsonRpcAnnotation != null) {
+            String method = jsonRpcAnnotation.value();
+            boolean notification = jsonRpcAnnotation.notification();
 
             if (notification) {
 
-                Converter<JsonRPCNotification, RequestBody> delegate =
-                        retrofit.nextRequestBodyConverter(this, JsonRPCNotification.class, annotations,
+                Converter<JsonRpcNotification, RequestBody> delegate =
+                        retrofit.nextRequestBodyConverter(this, JsonRpcNotification.class, annotations,
                                 methodAnnotations);
                 //noinspection unchecked
-                return new JsonRPCConverters.JsonRPCNotificationBodyConverter(method, delegate);
+                return new JsonRpcConverters.JsonRPCNotificationBodyConverter(method, delegate);
             } else {
 
-                Converter<JsonRPCRequest, RequestBody> delegate =
-                        retrofit.nextRequestBodyConverter(this, JsonRPCRequest.class, annotations,
+                Converter<JsonRpcRequest, RequestBody> delegate =
+                        retrofit.nextRequestBodyConverter(this, JsonRpcRequest.class, annotations,
                                 methodAnnotations);
                 //noinspection unchecked
-                return new JsonRPCConverters.JsonRPCRequestBodyConverter(method, delegate);
+                return new JsonRpcConverters.JsonRPCRequestBodyConverter(method, delegate);
             }
 
         }

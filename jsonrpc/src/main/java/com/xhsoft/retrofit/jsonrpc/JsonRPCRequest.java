@@ -3,9 +3,9 @@ package com.xhsoft.retrofit.jsonrpc;
 import java.util.Random;
 
 /**
- * JsonRPC 请求
+ * JsonRpc 请求
  */
-public class JsonRPCRequest {
+public class JsonRpcRequest {
     static final Random RANDOM = new Random();
 
     final String jsonrpc;
@@ -13,16 +13,16 @@ public class JsonRPCRequest {
     final Object params;
     final long id;
 
-    JsonRPCRequest(String method, Object params, long id, String jsonrpc) {
+    JsonRpcRequest(String method, Object params, long id, String jsonrpc) {
         this.method = method;
         this.params = params;
         this.id = id;
         this.jsonrpc = jsonrpc;
     }
 
-    static JsonRPCRequest create(String method, Object args) {
+    static JsonRpcRequest create(String method, Object args) {
         long id = Math.abs(RANDOM.nextInt());
-        return new JsonRPCRequest(method, args, id, "2.0");
+        return new JsonRpcRequest(method, args, id, "2.0");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class JsonRPCRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        JsonRPCRequest that = (JsonRPCRequest) o;
+        JsonRpcRequest that = (JsonRpcRequest) o;
 
         if (id != that.id) return false;
         //noinspection SimplifiableIfStatement

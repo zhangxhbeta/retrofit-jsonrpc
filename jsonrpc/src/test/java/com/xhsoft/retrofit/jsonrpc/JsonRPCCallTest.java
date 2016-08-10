@@ -1,7 +1,8 @@
 package com.xhsoft.retrofit.jsonrpc;
 
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCall;
-import com.xhsoft.retrofit.jsonrpc.adapter.JsonRPCCallAdapterFactory;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCall;
+import com.xhsoft.retrofit.jsonrpc.adapter.JsonRpcCallAdapterFactory;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.mockwebserver.MockResponse;
@@ -18,9 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 /**
- * 测试通过 JsonRPC 适配器来搞定无法直接返回body的问题
+ * 测试通过 JsonRpc 适配器来搞定无法直接返回body的问题
  */
-public class JsonRPCCallTest {
+public class JsonRpcCallTest {
     @Rule
     public final MockWebServer server = new MockWebServer();
 
@@ -36,20 +37,20 @@ public class JsonRPCCallTest {
         retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(server.url("/")) // Local Server: "http://localhost:1234"
-                .addConverterFactory(JsonRPCConverterFactory.create())
+                .addConverterFactory(JsonRpcConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
-                .addCallAdapterFactory(new JsonRPCCallAdapterFactory())
+                .addCallAdapterFactory(new JsonRpcCallAdapterFactory())
                 .build();
     }
 
     interface FoobarService {
         @POST("/")
-        @JsonRPC
-        JsonRPCCall<Integer> jsonRpcCall(@Body Object... a);
+        @JsonRpc
+        JsonRpcCall<Integer> jsonRpcCall(@Body Object... a);
 
         @POST("/")
-        @JsonRPC
-        JsonRPCCall<JsonRPCResponse<Integer>> jsonRpcCallResponse(@Body Object... a);
+        @JsonRpc
+        JsonRpcCall<JsonRpcResponse<Integer>> jsonRpcCallResponse(@Body Object... a);
     }
 
     @Test
@@ -81,7 +82,7 @@ public class JsonRPCCallTest {
                 ));
 
         FoobarService service = retrofit.create(FoobarService.class);
-        JsonRPCResponse<Integer> response = service.jsonRpcCallResponse(2, 3).execute();
+        JsonRpcResponse<Integer> response = service.jsonRpcCallResponse(2, 3).execute();
 
         assertThat(response.getResult()).isEqualTo(6);
     }
@@ -105,7 +106,7 @@ public class JsonRPCCallTest {
         try {
             service.jsonRpcCall(2, 3).execute();
             fail("失败未抛出异常");
-        } catch (JsonRPCException e) {
+        } catch (JsonRpcException e) {
             assertThat(e.getCode()).isEqualTo(-10086);
         }
 
@@ -128,11 +129,11 @@ public class JsonRPCCallTest {
         FoobarService service = retrofit.create(FoobarService.class);
 
         try {
-            JsonRPCResponse<Integer> res = service.jsonRpcCallResponse(2, 3).execute();
+            JsonRpcResponse<Integer> res = service.jsonRpcCallResponse(2, 3).execute();
             assertThat(res.getResult()).isNull();
             assertThat(res.getError().getCode()).isEqualTo(-10086);
             fail("失败未抛出异常");
-        } catch (JsonRPCException e) {
+        } catch (JsonRpcException e) {
             assertThat(e.getCode()).isEqualTo(-10086);
         }
 

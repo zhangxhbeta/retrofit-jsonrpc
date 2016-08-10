@@ -17,7 +17,7 @@ import retrofit2.http.POST;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonRPCConverterTest {
+public class JsonRpcConverterTest {
     @Rule
     public final MockWebServer server = new MockWebServer();
 
@@ -33,19 +33,19 @@ public class JsonRPCConverterTest {
         retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(server.url("/")) // Local Server: "http://localhost:1234"
-                .addConverterFactory(JsonRPCConverterFactory.create())
+                .addConverterFactory(JsonRpcConverterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build();
     }
 
     interface MultiplicationService {
         @POST("/rpc")
-        @JsonRPC("Arith.multiply")
+        @JsonRpc("Arith.multiply")
         Call<Integer> multiply(@Body Object... a);
 
         @POST("/rpc")
-        @JsonRPC("Arith.multiply")
-        Call<JsonRPCResponse<Integer>> getResponseMultiply(@Body Object... a);
+        @JsonRpc("Arith.multiply")
+        Call<JsonRpcResponse<Integer>> getResponseMultiply(@Body Object... a);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class JsonRPCConverterTest {
 
         MultiplicationService service = retrofit.create(MultiplicationService.class);
 
-        Response<JsonRPCResponse<Integer>> response = service.getResponseMultiply(2, 3).execute();
+        Response<JsonRpcResponse<Integer>> response = service.getResponseMultiply(2, 3).execute();
 
         RecordedRequest request = server.takeRequest();
         assertThat(request.getHeader("Content-Type"))

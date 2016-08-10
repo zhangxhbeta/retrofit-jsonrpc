@@ -145,7 +145,7 @@
         <version>2.15</version>
         <configuration>
           <failsOnError>true</failsOnError>
-          <configLocation>checkstyle.xml</configLocation>
+          <configLocation>google_checks.xml.xml</configLocation>
           <consoleOutput>true</consoleOutput>
         </configuration>
         <executions>

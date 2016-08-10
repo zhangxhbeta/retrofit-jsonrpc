@@ -1,11 +1,11 @@
 package com.xhsoft.retrofit.jsonrpc;
 
 /**
- * JsonRPC 错误
+ * JsonRpc 错误.
  *
- * Created by zhangxh on 16/4/13.
+ * @author zhangxh
  */
-public class JsonRPCError {
+public class JsonRpcError {
     /**
      * 解析错误
      */
@@ -72,7 +72,7 @@ public class JsonRPCError {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        JsonRPCError that = (JsonRPCError) o;
+        JsonRpcError that = (JsonRpcError) o;
 
         if (!code.equals(that.code)) return false;
         return message.equals(that.message);
@@ -88,7 +88,7 @@ public class JsonRPCError {
 
     @Override
     public String toString() {
-        return "JsonRPCError{" +
+        return "JsonRpcError{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
                 '}';
