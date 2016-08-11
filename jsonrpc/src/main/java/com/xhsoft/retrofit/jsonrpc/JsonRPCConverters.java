@@ -8,11 +8,12 @@ import java.io.IOException;
 
 public class JsonRpcConverters {
 
-  static class JsonRPCResponseBodyConverter<T> implements Converter<ResponseBody, T> {
+  static class JsonRpcResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     final Converter<ResponseBody, JsonRpcResponse<T>> delegate;
     final boolean forceReturResponse;
 
-    JsonRPCResponseBodyConverter(Converter<ResponseBody, JsonRpcResponse<T>> delegate, boolean forceReturResponse) {
+    JsonRpcResponseBodyConverter(Converter<ResponseBody, JsonRpcResponse<T>> delegate,
+                                 boolean forceReturResponse) {
       this.delegate = delegate;
       this.forceReturResponse = forceReturResponse;
     }
@@ -29,11 +30,11 @@ public class JsonRpcConverters {
     }
   }
 
-  static class JsonRPCRequestBodyConverter<T> implements Converter<T, RequestBody> {
+  static class JsonRpcRequestBodyConverter<T> implements Converter<T, RequestBody> {
     final String method;
     final Converter<JsonRpcRequest, RequestBody> delegate;
 
-    JsonRPCRequestBodyConverter(String method, Converter<JsonRpcRequest, RequestBody> delegate) {
+    JsonRpcRequestBodyConverter(String method, Converter<JsonRpcRequest, RequestBody> delegate) {
       this.method = method;
       this.delegate = delegate;
     }
@@ -44,11 +45,12 @@ public class JsonRpcConverters {
     }
   }
 
-  static class JsonRPCNotificationBodyConverter<T> implements Converter<T, RequestBody> {
+  static class JsonRpcNotificationBodyConverter<T> implements Converter<T, RequestBody> {
     final String method;
     final Converter<JsonRpcNotification, RequestBody> delegate;
 
-    JsonRPCNotificationBodyConverter(String method, Converter<JsonRpcNotification, RequestBody> delegate) {
+    JsonRpcNotificationBodyConverter(String method,
+                                     Converter<JsonRpcNotification, RequestBody> delegate) {
       this.method = method;
       this.delegate = delegate;
     }

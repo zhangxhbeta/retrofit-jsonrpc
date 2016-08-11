@@ -26,7 +26,7 @@ public class JsonRpcCallAdapter<T> implements JsonRpcCall<T> {
     this.clientRequireAllResponse = clientRequireAllResponse;
   }
 
-  public void _onResponse(Call<T> call, Response<T> response, JsonRpcCallback<T> callback) {
+  private void onResponseProcess(Call<T> call, Response<T> response, JsonRpcCallback<T> callback) {
     int code = response.code();
 
     if (code >= 200 && code < 300) {
@@ -76,12 +76,12 @@ public class JsonRpcCallAdapter<T> implements JsonRpcCall<T> {
       @Override
       public void onResponse(final Call<T> call, final Response<T> response) {
         if (callbackExecutor == null) {
-          _onResponse(call, response, callback);
+          onResponseProcess(call, response, callback);
         } else {
           callbackExecutor.execute(new Runnable() {
             @Override
             public void run() {
-              _onResponse(call, response, callback);
+              onResponseProcess(call, response, callback);
             }
           });
         }
@@ -114,13 +114,13 @@ public class JsonRpcCallAdapter<T> implements JsonRpcCall<T> {
   public T execute() throws JsonRpcException {
     try {
       if (clientRequireAllResponse) {
-        T _body = call.execute().body();
-        JsonRpcResponse res = (JsonRpcResponse) _body;
+        T body = call.execute().body();
+        JsonRpcResponse res = (JsonRpcResponse) body;
         if (res.getError() != null) {
           throw new JsonRpcException(res.getError());
         }
 
-        return _body;
+        return body;
       } else {
         JsonRpcResponse<T> res = (JsonRpcResponse<T>) call.execute().body();
         if (res.getError() != null) {
@@ -128,8 +128,8 @@ public class JsonRpcCallAdapter<T> implements JsonRpcCall<T> {
         }
         return res.getResult();
       }
-    } catch (IOException e) {
-      throw new JsonRpcException(e.getLocalizedMessage(), JsonRpcError.ERROR_CODE_NETWORK_ERROR);
+    } catch (IOException ex) {
+      throw new JsonRpcException(ex.getLocalizedMessage(), JsonRpcError.ERROR_CODE_NETWORK_ERROR);
     }
   }
 

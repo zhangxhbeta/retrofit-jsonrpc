@@ -93,7 +93,7 @@ public class MultiplicationAsyncTest {
       }
 
       @Override
-      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
+      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException ex) {
         waiter.fail("错误调用 unexpectedError");
         waiter.resume();
       }
@@ -133,10 +133,10 @@ public class MultiplicationAsyncTest {
       }
 
       @Override
-      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
-        waiter.assertNotNull(t);
-        waiter.assertEquals(t.getCode(), -10086);
-        waiter.assertEquals(t.getMessage(), "测试错误");
+      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException ex) {
+        waiter.assertNotNull(ex);
+        waiter.assertEquals(ex.getCode(), -10086);
+        waiter.assertEquals(ex.getMessage(), "测试错误");
         waiter.resume();
       }
     });
@@ -177,7 +177,7 @@ public class MultiplicationAsyncTest {
       }
 
       @Override
-      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException t) {
+      public void unexpectedError(JsonRpcCall<Integer> call, JsonRpcException ex) {
         waiter.fail("错误调用 unexpectedError");
         waiter.resume();
       }

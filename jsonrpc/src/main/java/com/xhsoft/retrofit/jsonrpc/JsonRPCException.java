@@ -1,7 +1,7 @@
 package com.xhsoft.retrofit.jsonrpc;
 
 /**
- * 按照 JSON-RPC 规范的 Error 定义的异常
+ * 按照 JSON-RPC 规范的 Error 定义的异常.
  **/
 public class JsonRpcException extends RuntimeException {
   private int code;
@@ -32,7 +32,7 @@ public class JsonRpcException extends RuntimeException {
   }
 
   /**
-   * Set the JSON-RPC error code for this exception
+   * Set the JSON-RPC error code for this exception.
    *
    * @param code
    *            The JSON-RPC error code, usually negative in the range of

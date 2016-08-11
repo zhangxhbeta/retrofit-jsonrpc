@@ -1,5 +1,8 @@
 package com.xhsoft.retrofit.jsonrpc;
 
+/**
+ * JsonRpc 规范的通知, 没有 id.
+ */
 class JsonRpcNotification {
 
   final String jsonrpc;

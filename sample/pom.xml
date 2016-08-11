@@ -16,12 +16,12 @@
         <dependency>
             <groupId>com.xhsoft.retrofit</groupId>
             <artifactId>jsonrpc</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.xhsoft.retrofit</groupId>
             <artifactId>encryption</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>

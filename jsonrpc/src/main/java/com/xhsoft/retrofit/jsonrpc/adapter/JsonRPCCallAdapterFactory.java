@@ -12,7 +12,9 @@ import java.lang.reflect.Type;
 import java.util.concurrent.Executor;
 
 /**
- * Created by zhangxh on 16/4/14.
+ * JsonRpcCall适配器工厂.
+ *
+ * @author zhangxh
  */
 public class JsonRpcCallAdapterFactory extends CallAdapter.Factory {
   @Override

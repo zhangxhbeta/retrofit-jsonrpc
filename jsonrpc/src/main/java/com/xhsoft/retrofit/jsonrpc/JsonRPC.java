@@ -12,18 +12,19 @@ import java.lang.annotation.Target;
 @Target(METHOD)
 @Retention(RUNTIME)
 public @interface JsonRpc {
+
   /**
-   * 调用方法，对应到 JsonRpc 规范里面的 method
+   * 调用方法，对应到 JsonRpc 规范里面的 method.
    */
   String value() default "";
 
   /**
-   * 将 Java 方法名追加到 method。目前暂不支持
+   * 将 Java 方法名追加到 method。目前暂不支持.
    */
   boolean useJavaMethodName() default false;
 
   /**
-   * 规范里面定义的，没有id的特殊请求，不需要有响应
+   * 规范里面定义的，没有id的特殊请求，不需要有响应.
    */
   boolean notification() default false;
 }
