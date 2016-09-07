@@ -80,7 +80,9 @@ int result = service.multiply(2, 3).execute(); // -> 6
 
 ## 下载
 
-目前还没准备好
+标准的 maven 项目，添加依赖即可，不过目前还没发布到中央仓库，囧。
+
+大家先 install 到本地，或者发布到私服用一用吧
 
 ## 感谢
 
