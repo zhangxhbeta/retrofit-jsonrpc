@@ -17,8 +17,13 @@
 
 <!-- 添加依赖 -->
 <dependency>
-    <groupId>com.github.zhangxhbeta</groupId>
-    <artifactId>retrofit-jsonrpc</artifactId>
+    <groupId>com.github.zhangxhbeta.retrofit-jsonrpc</groupId>
+    <artifactId>jsonrpc</artifactId>
+    <version>v1.0.2</version>
+</dependency>
+<dependency>
+    <groupId>com.github.zhangxhbeta.retrofit-jsonrpc</groupId>
+    <artifactId>encryption</artifactId>
     <version>v1.0.2</version>
 </dependency>
 ```
@@ -37,7 +42,8 @@ allprojects {
 添加依赖
 ```
 dependencies {
-    compile 'com.github.zhangxhbeta:retrofit-jsonrpc:v1.0.2'
+    compile 'com.github.zhangxhbeta.retrofit-jsonrpc:jsonrpc:v1.0.2'
+    compile 'com.github.zhangxhbeta.retrofit-jsonrpc:encryption:v1.0.2'
 }
 ```
 
