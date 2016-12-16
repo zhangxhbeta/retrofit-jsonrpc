@@ -2,6 +2,45 @@
 
 基于 Retrofit 的 JSON-RPC 2.0 协议实现
 
+## 下载
+
+* 通过标准的 Maven 方式
+
+```xml
+<!-- 添加 Jitpack 仓库 -->
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<!-- 添加依赖 -->
+<dependency>
+    <groupId>com.github.zhangxhbeta</groupId>
+    <artifactId>retrofit-jsonrpc</artifactId>
+    <version>v1.0.2</version>
+</dependency>
+```
+
+* Gradle 方式
+
+在根 build.gradle 里面添加
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+添加依赖
+```
+dependencies {
+    compile 'com.github.zhangxhbeta:retrofit-jsonrpc:v1.0.2'
+}
+```
+
 ## 使用方法
 
 首先声明一下你的模块接口，相比 `Retrofit 2` （注意版本）本来的方式，多了一个注解 `@JsonRpc`，注解的值填写的是 JsonRPC 协议里面的方法名，目前有2个地方不够完美
@@ -78,11 +117,7 @@ int result = service.multiply(2, 3).execute(); // -> 6
 - [ ] 安卓环境测试
 - [ ] 补充更多例子，如：错误统一拦截处理，附加自定义 http 头，Cookie 处理等
 
-## 下载
 
-标准的 maven 项目，添加依赖即可，不过目前还没发布到中央仓库，囧。
-
-大家先 install 到本地，或者发布到私服用一用吧
 
 ## 感谢
 
