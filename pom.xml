@@ -19,6 +19,13 @@
     <module>sample</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
@@ -113,6 +120,15 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <!--发布到 Jitpack-->
+  <dependencies>
+    <dependency>
+      <groupId>com.github.User</groupId>
+      <artifactId>Repo</artifactId>
+      <version>Tag</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <pluginManagement>
