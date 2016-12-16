@@ -121,15 +121,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <!--发布到 Jitpack-->
-  <dependencies>
-    <dependency>
-      <groupId>com.github.zhangxhbeta</groupId>
-      <artifactId>retrofit-jsonrpc</artifactId>
-      <version>-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <pluginManagement>
       <plugins>
