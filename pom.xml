@@ -124,9 +124,9 @@
   <!--发布到 Jitpack-->
   <dependencies>
     <dependency>
-      <groupId>com.github.User</groupId>
-      <artifactId>Repo</artifactId>
-      <version>Tag</version>
+      <groupId>com.github.zhangxhbeta</groupId>
+      <artifactId>retrofit-jsonrpc</artifactId>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 
