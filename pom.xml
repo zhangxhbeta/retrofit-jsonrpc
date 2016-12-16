@@ -126,7 +126,7 @@
     <dependency>
       <groupId>com.github.zhangxhbeta</groupId>
       <artifactId>retrofit-jsonrpc</artifactId>
-      <version>master-SNAPSHOT</version>
+      <version>-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
