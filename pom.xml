@@ -6,7 +6,7 @@
 
   <groupId>com.xhsoft.retrofit</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
 
   <name>Json-RPC (Parent)</name>
@@ -126,7 +126,7 @@
     <dependency>
       <groupId>com.github.zhangxhbeta</groupId>
       <artifactId>retrofit-jsonrpc</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
   </dependencies>
 
