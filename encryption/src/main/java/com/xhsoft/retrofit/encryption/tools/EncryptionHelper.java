@@ -63,7 +63,7 @@ public class EncryptionHelper {
     c3des.init(Cipher.ENCRYPT_MODE, myKey, ivspec);
     byte[] cipherText = c3des.doFinal(plaintext);
 
-    return Base64.encode(cipherText, Base64.DEFAULT);
+    return Base64.encode(cipherText, Base64.NO_WRAP);
   }
 
   /**
