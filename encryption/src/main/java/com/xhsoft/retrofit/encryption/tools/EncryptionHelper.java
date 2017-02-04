@@ -11,7 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
  * 加解密工具类.
  *
  * @author zhangxhbeta
- *
  */
 public class EncryptionHelper {
 
@@ -28,12 +27,11 @@ public class EncryptionHelper {
    */
   public static String encryptText(String plainText, String strKey, byte[] byteIv)
       throws GeneralSecurityException {
-
-    byte[] plaintext = plainText.getBytes();// input
-
-    byte[] encryptText = encryptBytes(plaintext, strKey, byteIv);
-
     try {
+      byte[] plaintext = plainText.getBytes("UTF-8");// input
+
+      byte[] encryptText = encryptBytes(plaintext, strKey, byteIv);
+
       String encryptedString = new String(encryptText, "US-ASCII");
       return encryptedString;
     } catch (UnsupportedEncodingException ex) {
@@ -84,7 +82,7 @@ public class EncryptionHelper {
   public static byte[] dencryptBytes(byte[] inputBytes, String strKey, byte[] byteIv)
       throws GeneralSecurityException, UnsupportedEncodingException {
 
-    byte[] inputData = Base64.decode(inputBytes, Base64.DEFAULT);
+    byte[] inputData = Base64.decode(inputBytes, Base64.NO_WRAP);
 
     byte[] tdesKeyData = hexStringToByteArray(strKey);
     byte[] myIv = byteIv.length == 0 ? defaultIV : byteIv;
